@@ -1,0 +1,24 @@
+# App de Wil. Para cambiar de versión basta con cambiar la tag (v1 <-> v2) y hacer push:
+# Argo CD lo ve y actualiza el pod en el namespace dev.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wil-playground
+  namespace: dev
+  labels:
+    app: wil-playground
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wil-playground
+  template:
+    metadata:
+      labels:
+        app: wil-playground
+    spec:
+      containers:
+        - name: playground
+          image: wil42/playground:v1
+          ports:
+            - containerPort: 8888
